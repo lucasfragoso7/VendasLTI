@@ -2,49 +2,43 @@ package LTI.Service;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
 import LTI.Interfaces.Contrato;
-
+import LTI.exceptions.erro;
 @Service
-public abstract class ServiceGeral<T extends Contrato , X> {
-	@Autowired
-	protected MongoRepository<T, String> repository;
+public abstract class ServiceGeral<T extends Contrato> {
 
-	public ServiceGeral(MongoRepository<T, String> repository) {
-		this.repository = repository;
+	protected MongoRepository<T, String> mongoRepository;
+
+	public ServiceGeral(MongoRepository<T, String> mongoRepository) {
+		this.mongoRepository = mongoRepository;
 	}
 
 	public T create(T t) {
-		return (T) repository.insert(t);
+		return mongoRepository.insert(t);
 	}
 
-	public T read(T t) {
-
-			return repository.findById(t.getId()).get();
-		
+	public T update(T t) throws erro {
+		if (!mongoRepository.existsById(t.getId()))
+			throw new erro("Porra");
+		return mongoRepository.save(t);
 	}
 
-	public T update(T t) {
-		return (T) repository.insert(t);
-	}
-
-	public boolean delete(String id) {
-		if (repository.existsById(id)) {
-			repository.deleteById(id);
-			return true;
+	public void delete(String id) throws erro {
+		if (!mongoRepository.existsById(id)) {
+			throw new erro("Porra");
 		}
-		return false;
+		mongoRepository.deleteById(id);
 	}
 
 	public List<T> readAll() {
-		return repository.findAll();
+		return mongoRepository.findAll();
 	}
 
 	public T getById(String id) {
-		return repository.findById(id).get();
+		return mongoRepository.findById(id).get();
 	}
 
 }

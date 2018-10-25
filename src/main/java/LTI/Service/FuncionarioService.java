@@ -7,7 +7,7 @@ import LTI.Domain.Funcionario;
 import LTI.Repository.FuncionarioRepository;
 
 @Service
-public class FuncionarioService extends ServiceGeral<Funcionario, String>
+public class FuncionarioService extends ServiceGeral<Funcionario>
 {
 	@Autowired
 	public FuncionarioService(FuncionarioRepository repository) 

@@ -11,6 +11,7 @@ public class Marca implements  Contrato {
 	private String id;
 	private String nome;
 	private Fornecedor fornecedor;
+	
 	public String getId() {
 		return id;
 	}

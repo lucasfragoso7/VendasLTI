@@ -17,7 +17,6 @@ public class Venda implements  Contrato {
 	@DBRef
 	private Funcionario funcionario;
 	private  Double valorTotal;
-	@DBRef
 	private ArrayList<Pedido> Pedidos;
 	public String getId() {
 		return id;
