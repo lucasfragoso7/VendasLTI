@@ -22,13 +22,13 @@ public abstract class ServiceGeral<T extends Contrato> {
 
 	public T update(T t) throws erro {
 		if (!mongoRepository.existsById(t.getId()))
-			throw new erro("Porra");
+			throw new erro("Não existe");
 		return mongoRepository.save(t);
 	}
 
 	public void delete(String id) throws erro {
 		if (!mongoRepository.existsById(id)) {
-			throw new erro("Porra");
+			throw new erro("Não existe");
 		}
 		mongoRepository.deleteById(id);
 	}
